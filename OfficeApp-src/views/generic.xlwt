@@ -1,0 +1,1 @@
+{{from gluon.serializers import xlwt}}{{=XML(xlwt(response._vars))}}

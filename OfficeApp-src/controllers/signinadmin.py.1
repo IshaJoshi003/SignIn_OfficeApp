@@ -1,0 +1,47 @@
+# -*- coding: utf-8 -*-
+# try something like
+def index():
+    return dict(message="Hello")
+
+
+
+def Admin():
+    #Define the query object. 
+    if request.vars.date1 != None and request.vars.date2 !=None  and request.vars.date2 != "" and request.vars.date1 != "":
+        query=((db.visit_log.date >= request.vars.date1 and db.visit_log.date <= request.vars.date2))
+        response.flash = T('Quick Sign up form has errors 1'+request.vars.date1+","+request.vars.date2)
+    else:
+        query=((db.visit_log.id > 0))
+        response.flash = T('Quick Sign up form has errors 2')
+    
+    #Define the fields to show on grid. 
+    fields = (db.visit_log.id, db.visit_log.name, db.visit_log.phone_number,db.visit_log.address,db.visit_log.date, db.visit_log.email)
+
+    #Define headers as tuples/dictionaries
+    headers = {'visit_log.id':   'ID',
+           'visit_log.name': ' Name',
+           'visit_log.phone_number':'Phone_number',
+           'visit_log.address': 'Address',
+           'visit_log.date':'Date',
+           ' visit_log.email':'Email' }
+
+    #Let's specify a default sort order on id and name
+    default_sort_order=[db.visit_log.id]
+
+    query=((db.visit_log.date >= '2015-06-09 23:55:57' and db.visit_log.date <= '2015-06-11 23:55:57'))
+
+
+    #Creating the grid object
+    form1=FORM('From Date', INPUT(_name='date1', _class='datetime'),'To Date',INPUT(_name='date2', _class='datetime'), INPUT(_type='submit'))
+    
+    form = SQLFORM.grid(query=query, fields=fields, headers=headers, orderby=default_sort_order,searchable=True, selectable=None,
+                create=True, deletable=False, editable=False, maxtextlength=64, paginate=25, csv=True)
+
+    #date_element_from = TR(LABEL('From Date'),INPUT(_name='date1',_class='datetime'))
+    #date_element_to =  TR(LABEL('To Date'),INPUT(_name='date2',_class='datetime'),INPUT(_type='submit',_name='date_search', _value='date_search'))
+
+    
+    form[0].insert(-1,form1)
+    #form[0].insert(-1,date_element_to)
+    
+    return dict(form=form)

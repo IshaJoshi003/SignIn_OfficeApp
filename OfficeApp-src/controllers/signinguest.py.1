@@ -1,0 +1,14 @@
+# -*- coding: utf-8 -*-
+# try something like
+def index(): 
+    
+    form=SQLFORM.factory(db.visit_logs, ignore_rw=False)
+    if form.accepted:
+        response.flash='form accepted'
+        
+    elif form.errors:
+        response.flash='form contains error'
+        
+    else:
+        response.flash='form displays for the first time'
+    return locals()

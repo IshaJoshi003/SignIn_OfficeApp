@@ -1,0 +1,4 @@
+# index function
+def index(): 
+    
+    return dict(message=T('Welcome to Office_App!'))

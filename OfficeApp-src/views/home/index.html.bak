@@ -1,0 +1,69 @@
+{{left_sidebar_enabled,right_sidebar_enabled=False,('message' in globals())}}
+{{extend 'layout.html'}}
+<style>
+    .box{
+    background-color: white;
+    display: table-cell;
+    border-radius:15px;
+    height: 300px;
+    text-align: center;    
+    vertical-align: middle;
+         
+}
+.text{
+    color:blue;
+    font-weight:bold;
+    text-align:center;
+    padding: 10px 0;
+}
+
+.wrapper {
+    display: table;
+    width: 100%;
+} 
+
+.middle {
+    display: table-cell;
+    width: 10%;
+    margin-top:100px;
+    text-align: center;
+    vertical-align: middle;
+}
+</style>
+
+
+
+{{block header}}
+    <header class="container-fluid background">
+      <div class="jumbotron text-center">
+        {{if response.title:}}
+        <h1>{{=response.title}}
+          <small>{{=response.subtitle or ''}}</small></h1>
+        {{pass}}
+      </div>
+    </header>
+{{end}}
+
+<div class="wrapper">
+    <div class="box"><a href='../signinguest/index'>
+        <div class="text"><H2>Sign-In Guest</H2></div></a>
+    </div>
+    <div class="middle"></div>
+    <div class="box"><a href='../signinadmin/index'>
+        <div class="text"><H2>Sign-In Admin</H2></div></a>
+    </div>
+</div>
+
+{{block right_sidebar}}
+<h4>
+    
+
+<ul>
+    <li>Welcome to our Login Page</li><br><br>
+    <li>Guests Please click on Sign-In Guest Button</li><br><br>
+    <li>Admin Please click on Sign-In Admin Button </li>
+</ul>
+</h4>
+
+{{end}}<br><br><br><br><br><br><br>
+<footer>© 2015 all rights reserved by Office_App</footer>
